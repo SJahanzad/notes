@@ -114,8 +114,13 @@ notebooks:
     kind: S2021, LN, Notebook
     link: /notes/notebooks/18_reinforcement_learning/
     text: <p>Reinforcement Learning</p>
-  - markdown: notebooks/12_temporal_probability_models/
+  - md: notebooks/12_temporal_probability_models/
     kind: F2021, LN, Markdown
+    metadata: notebooks/12_temporal_probability_models/metadata.yml
+    text: Temporal Probability Models - Part 1
+    link: /notes/notebooks/12_temporal_probability_models/
+    description: <p>Temporal Probability Models and Hidden Markov Models and their
+      Applications</p>
 kind: Index
 search:
   content: true

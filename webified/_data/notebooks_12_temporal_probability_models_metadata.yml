@@ -1,0 +1,34 @@
+title: Temporal Probability Models
+header:
+  title: <p>Temporal Probability Models (up to filter/monitor)</p>
+  description: <p>Temporal Probability Models and Hidden Markov Models and their Applications</p>
+authors:
+  label:
+    position: top
+  content:
+  - name: Arshan Dalili
+    role: Author
+    contact:
+    - link: https://github.com/arshandalili
+      icon: fab fa-github
+    - link: mailto:arshandalili@gmail.com
+      icon: fas fa-envelope
+  - name: Soroush Jahanzad
+    role: Author
+    contact:
+    - link: https://github.com/SJahanzad
+      icon: fab fa-github
+    - link: mailto:SoroushJahanzad@gmail.com
+      icon: fas fa-envelope
+  - name: Mohammad Hejri
+    role: Author
+    contact:
+    - link: https://github.com/MohammadHejri
+      icon: fab fa-github
+comments:
+  label: false
+  kind: comments
+kind: Content
+search:
+  content: true
+  links: false

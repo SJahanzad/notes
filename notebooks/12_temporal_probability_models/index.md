@@ -1,7 +1,4 @@
 # Temporal Probability Models
-## Group Info:
-Group Number: 12
-Members: Arshan Dalili, Soroush Jahanzad, Mohammad Hejri
 
 
 
@@ -10,9 +7,9 @@ Members: Arshan Dalili, Soroush Jahanzad, Mohammad Hejri
 ## Table of Contents
 [Introduction](#Introduction)
 
-[Reasoning over time or space](#Reasoning-over-time-or-space)
-* [What is a Temporal Probability Model?](#What-is-a-Temporal-Probability-Model)
-* [Markov Models](#Markov-Models)
+[What is a Temporal Probability Model?](#What-is-a-Temporal-Probability-Model)
+
+[Markov Models](#Markov-Models)
 * [Joint Distributions of Markov Models](#Joint-Distributions-of-Markov-Models)
 * [Chain Rule](#Chain-Rule)
 
@@ -37,21 +34,21 @@ Members: Arshan Dalili, Soroush Jahanzad, Mohammad Hejri
 ## Introduction
 In this lecture note, we are going to talk about **_Temporal Probability Models_**. We will discuss what they are and how they can help us model problems that are subject to change over time.
 
-
-## Reasoning over time or space
 So far, we have learned how to deal with probabilistic reasoning in static worlds. That means each random variable has a fixed value and doesn't change over time. However, most of our problems don't have this static behavior, and the state varies over time (or space).
 
 Let' start with an example of a static problem:
 >Imagine that your car has broken down. You may guess that the problem is related to the engine, batteries, or other car parts. You may take the vehicle to a car repair shop to diagnose the problem and fix it. You know that during the diagnosis process, the broken part remains broken, so the state of the car doesn't change.
 <center>
-<img src="resources/sFAP5bQ.jpeg" alt="car repair" width="350"/>
+<img src="resources/car_repair.jpeg" alt="car repair" width="350"/>
 </center>
+
 
 But our problems aren't always static. Consider the below example:
 >Take diabetes management of a patient as our problem. We know that, for instance, the patient's blood sugar isn't constant and will vary over time, so there is a dynamic in the variables used to describe the patient's state (such as the blood sugar and insulin).
 
+
 <center>
-<img src="resources/wvnlp2L.jpeg" alt="diabetes" width="350"/>
+<img src="resources/diabetes.jpeg" alt="diabetes" width="350"/>
 </center>
 
 
@@ -60,116 +57,128 @@ As you can see, the patient's status varies over time, and our approaches in sta
 Temporal Probability Models can make it easier for us to model and solve these types of problems.
 
 
-### What is a Temporal Probability Model?
+## What is a Temporal Probability Model?
 
 As the diabetes example above shows, we need to introduce **time** (or space) for our models.
 Retake variables of the diabetes example. We know that these variables can change over time, so to manage the diabetes of the patient, we slice time at specific points and keep track of this evidence to evaluate the current state and predict the future diabetic condition of the patient.
 
 ><span style="color:DarkSlateGray">_**Hence we can model the diabetes status of a patient using a Temporal Probability Model.**_</span>
+
 There are some variables like measured blood sugar and pulse rate that are measurable, and we denote them as ${E}_t$ at time $t$.
 
 On the other hand, we have some unmeasurable variables like stomach content and blood sugar. (Notice that measured blood sugar and blood sugar are considered different variables since measured blood sugar has some errors.) and at time $t$, we use ${X}_t$ to denote them.
 In a nutshell, we have:
 <span style="color:DarkSlateGray">
-\begin{equation}
+$$
 {E}_t = Observable\;Variable\;at\;time\;t\\
 {X}_t = NonObservable\;Variable\;at\;time\;t
-\end{equation}
+$$
 </span>
 
 
-### Markov Models
-Let's define a random variable $X$ and call its value at a given time $t$ the state of $X$ and denote it as $X_t$. If in our model the future state of $X$ depends only on the current state of $X$ and not on states that had occurred before, we call it a **_First-order Markov Model_**, or simply a **_Markov Model_**. Bayesian network of this model looks like the below network and is referred to as a **_Markov Chain_**:
+## Markov Models
+Let's define a random variable $X$ and call its value at a given time $t$ the _**state of $X$**_ and denote it as $X_t$. If in our model, the future state of $X$ depends only on the current state of $X$ and not on states that had occurred before, we call it a **_First-order Markov Model_**, or simply a **_Markov Model_**. Bayesian network of this model looks like the below network and is referred to as a **_Markov Chain_**:
 <center>
-<img src="resources/k4JYqIC.png" alt="Bayes Net of Markov Model" width="400"/>
+<img src="resources/markov_bayesnet.png" alt="Bayes Net of Markov Model" width="400"/>
 </center>
 
 In a Markov chain, we can write the Morkov assumption as:
 
-\begin{equation}
+$$
 P(X_n=x_n|X_{1:n-1}=x_{1:n-1}) = P(X_n = x_n|X_{n - 1}=x_{n - 1})
-\end{equation}
+$$
 
 *Note:* We also define $X_{a:b}$ to denote a set of variables from $X_a$ to $X_b$.
 <span style="color:DarkSlateGray">
-\begin{equation}
+$$
 X_{a:b} = X_a, X_{a+1}, \cdots, X_{b-1}, X_b
-\end{equation}
+$$
 </span>
 
 In a similar way, we can use **_$i$th-order Markov Models_** to model situations in which the future state of $X$ depends only on $i$ recent states and not on states that had occrred before. In this case we have:
 
-\begin{equation}
+$$
 P(X_n=x_n|X_{1:n-1}=x_{1:n-1}) = P(X_n = x|X_{n - i:n - 1}=x_{n - i : n - 1})
-\end{equation}
+$$
 
 ### Joint Distributions of Markov Models
 
 Take $X$ as a Markov Model and consider its Bayesian network (depicted below).
 <center>
-<img src="resources/k4JYqIC.png" alt="Bayes Net of Markov Model" width="400"/>
+<img src="resources/markov_bayesnet.png" alt="Bayes Net of Markov Model" width="400"/>
 </center>
 
-We can quickly notice that for every $1\lt i\le n$ , if we are given $X_{i-1}$, then **$X_i$ is independent of $X_1, X_2, \cdots, X_{i-2}$** since there is only one inactive path between each of them and $X_i$. (Regarding the fact that $X_{i-1}$ is given)
+We can quickly notice that for every $1 \lt i \leq n$ , if we are given $X_{i-1}$, then **$X_i$ is independent of $X_1, X_2, \cdots, X_{i-2}$** since there is only one inactive path between each of them and $X_i$. (Regarding the fact that $X_{i-1}$ is given)
 So we have:
 <span style="color:DarkSlateGray">
-\begin{equation}
+$$
     X_i \perp \!\!\! \perp X_1, X_2, \cdots, X_{i-2} \vert X_{i-1}
-\end{equation}
+$$
 </span>
 We define two parameters here:
 * **Transition Probabilities**:
     <span style="color:DarkSlateGray">
-    \begin{equation}
+    $$
     P(X_t \vert X_{t-1})
-    \end{equation}
+    $$
     </span>
     It shows how each state is related to its previous state and how states develop.
     The **_Stationary assumption_** in Markov models ensures that transition probabilities don't change over time.
 * **Initial State Probability**:
     <span style="color:DarkSlateGray">
-    \begin{equation}
+    $$
     P(X_1)
-    \end{equation}
+    $$
     </span>
     It is the probability of the initial state ($X_1$), and we usually know its value.
     
-    We can find the joint distribution of X regarding the Bayesian network and the parameters we defined. If we consider $X_1$ to $X_n$, then we have:
+We can find the joint distribution of X regarding the Bayesian network and the parameters we defined. If we consider $X_1$ to $X_n$, then we have:
     <span style="color:DarkSlateGray">
-    \begin{equation}
+    $$
     P(X_1, X_2, \cdots, X_{n-1}, X_n) = P(X_1)P(X_2\vert X_1)P(X_3\vert X_2)\cdots P(X_{n-1}\vert X_{n-2})P(X_{n}\vert X_{n-1})\\ \Rightarrow P(X_1, X_2, \cdots, X_{n-1}, X_n) =P(X_1)\prod_{t=2}^{n}P(X_t \vert X_{t-1})
-    \end{equation}
+    $$
     </span>
+    
 In the next section, we will prove this joint distribution using Chain Rule and independence.
-
 
 
 
 ### Chain Rule
 Take $X$ as a Markov Model and consider its Bayesian network (depicted below).
 <center>
-<img src="resources/k4JYqIC.png" alt="Bayes Net of Markov Model" width="400"/>
+<img src="resources/markov_bayesnet.png" alt="Bayes Net of Markov Model" width="400"/>
 </center>
 
 We know that from Chain Rule, every joint distribution of $X_1$ to $X_n$ can be written as:
 <span style="color:DarkSlateGray">
-    \begin{equation}
+    $$
     P(X_1, X_2, \cdots, X_{n-1}, X_n) = P(X_1)P(X_2\vert X_1)P(X_3\vert X_1, X_2)\cdots P(X_{n}\vert X_1,X_2,\cdots X_{n-1})
-    \end{equation}
+    $$
     </span>
 Now, due to the independence we saw earlier, we can assume:
 <span style="color:DarkSlateGray">
-\begin{equation}
+$$
     X_3 \perp \!\!\! \perp X_1\vert X_2, X_4\perp \!\!\! \perp X_1,X_2\vert X_3, \cdots, X_{n}\perp \!\!\! \perp X_1,X_2\cdots X_{n-2}\vert X_{n-1}
-\end{equation}
+$$
 </span>
 So, after applying independence to Chain Rule, we have:
 <span style="color:DarkSlateGray">
-    \begin{equation}
+    $$
     P(X_1, X_2, \cdots, X_{n-1}, X_n)= P(X_1)P(X_2\vert X_1)P(X_3\vert X_1, X_2)\cdots P(X_{n}\vert X_1,X_2,\cdots X_{n-1})\\=P(X_1)P(X_2\vert X_1)P(X_3\vert X_2)\cdots P(X_{n}\vert X_{n-1})\\=P(X_1)\prod_{t=2}^{n}P(X_t \vert X_{t-1})
-    \end{equation}
+    $$
     </span>
 which is the same result we get from the previous section.
+
+To better grasp the idea, think of a situation in which you want to invest in the stock market. To evaluate your chances of profiting in the short term, you can model the market using a Markov chain where each state $X_t$ can indicate that your investment is "profitable," "indifferent," or "loss-making" in time $t$ compared to $t - 1$.
+
+While this model can be inaccurate, it can give a preliminary estimate and help you decide better. It can have a quite acceptable performance if we have good estimations of the transition probabilities. Now that we have modeled the situation with a Markov chain, we can use the chain rule to estimate the probability of the investment being profitable in the next $n$ days. This probability can be written as follows. Note that the state of the first day, or $X_0$, is known at the time of investment.
+
+$$
+P(X_0=x_0, X_1 = profitable, X_2 = profitable, \cdots, X_n = profitable) 
+$$
+$$= P(X_0 = x_0) P(X_1 = profitable | X_0 = x_0) \prod_{t=2}^{n}P(X_t = profitable\vert X_{t-1} = profitable)
+$$
+
 
 ## Mini-Forward Algorithm
 
@@ -181,32 +190,32 @@ Now that we have a good model, we need an efficient approach to find the probabi
 
 In the Mini-Forward algorithm, we use the probabilities for the initial state and forward simulation to calculate the probabilities in the future states. The probability of outcome $x_i$ in the state $X_n$ using this algorithm is:
 
-\begin{equation}
+$$
     P(X_n = x_i) = \sum_{x_j} P(X_n = x_i | X_{n - 1} = x_j) P(X_{n - 1} = x_j)
-\end{equation}
+$$
 
 This can be easily computed for each state because we know the initial probability $P(X_1 = x_k)$ for every $k$ and the transition probabilities for each state can also be calculated using this algorothm.
 
 Now that we have this solution, we can say that the probability that the $n$th day after today will be sunny in our example is:
 
-\begin{equation}
+$$
     P(X_{n + 1} = sunny) = \sum_{x_j \in \{sunny, rainy\}} P(X_n = sunny | X_{n - 1} = x_j) P(X_{n - 1} = x_j)
-\end{equation}
+$$
 
-\begin{equation}
+$$
     \Rightarrow P(X_{n + 1} = sunny) = 0.9 \times P(X_n = sunny | X_{n - 1} = sunny) + 0.3 \times P(X_n = sunny | X_{n - 1} = rainy)
-\end{equation}
+$$
 
 Now, let's take a look at the state of weather with initial observation of sun:
 <center>
-<img src="resources/lnpogDU.png" alt="Initial Sunny Day" width="600"/>
+<img src="resources/sunny_initial.png" alt="Initial Sunny Day" width="600"/>
 </center>
 <br />
 
 Finally, let's take a look at the state of weather with initial observation of rain:
 
 <center>
-<img src="resources/WmoLVeV.png" alt="Initial Sunny Day" width="600"/>
+<img src="resources/weather_state.png" alt="Weather State" width="600"/>
 </center>
 
 
@@ -217,9 +226,9 @@ An interesting question to ask in problems modeled using Markov chains is about 
 
 In the general case, we cannot say what the state will be in the far future. However, for most Markov chains, we will eventually end up in the same distribution no matter what the initial distribution is. In other words, the distribution we end up in is independent of the initial distribution. In such cases, the distribution we end up with is called the **stationary distribution** of the chain. This distribution is denoted by $P_\infty$ and satisfies the condition below.
 
-\begin{equation}
+$$
     P_{\infty}(X) = P_{\infty + 1}(X) = \sum_{x} P(X|x) P_{\infty}(x)
-\end{equation}
+$$
 
 In the weather example we mentioned earlier, the stationary distribution denotes the probability that each day will be sunny or rainy in general.
 
@@ -229,27 +238,27 @@ In the weather example we mentioned earlier, the stationary distribution denotes
 Sometimes we would like to find out what happened in the past using the knowledge that we have in present. Consider the trip we discussed earlier as an example. Imagine that you and your friends want to go outside, but some of your friends warn you that everything might be wet if it had rained in the past $n$ days. Since your destination is too far, you do not know about its past, so we need to reason about the most likely sequence of your destination's weather in the past $n$ days. The course of this problem can be shown using the following figure.
 
 <center>
-<img src="resources/N6fC8TW.png" alt="Weather CPT" width=400/>
+<img src="resources/weather_cpt.png" alt="Weather CPT" width=400/>
 </center> 
 
 Again, a slow answer would be to enumerate all possible combinations and calculate the probabilities. However, we can calculate the most likely sequence inductively, remember the incremental probabilities, and update the most likely sequence as we proceed. This approach is called the **Mini-Viterbi Algorithm**.
 
 In the Mini-Viterbi algorithm, we define $m_t[x]$ and $a_t[x]$ as:
 
-\begin{equation}
+$$
     m_t[x] = \max_{x_{1:t - 1}} P(x_{1:t - 1}, x)
-\end{equation}
-\begin{equation}
+$$
+$$
     a_t[x] = arg\!\max_{x_{1:t - 1}} P(x_{1:t - 1}, x)
-\end{equation}
+$$
 
 The equation above can be rewritten to:
-\begin{equation}
-    m_1[x] = P(X_1 = x1)
-\end{equation}
-\begin{equation}
+$$
+    m_1[x] = P(X_1 = x_1)
+$$
+$$
     m_t[x] = \max_{x_{1:t - 1}} P(x_t | x_{t - 1}) m_{t - 1}[x]
-\end{equation}
+$$
 
 Using this method, the most likely sequence in the past $t - 1$ states, also known as the most likely explanation, will be available in $a_t[x]$.
 
@@ -268,15 +277,15 @@ Now, we get the time involved in our problem. Suppose that if today is sunny, to
 
 Consider the figure below to get a better understanding of the problem discussed above:
 <center>
-<img src="resources/YOld6zJ.jpeg" alt="Bayes Net of Markov Model" width=600/>
+<img src="resources/weather_mood_cpt_diagram.jpeg" alt="CPT Diagram of Weather and Mood" width=600/>
 </center>
 
 Now, we formulate the problem formally:
 <span style="color:DarkSlateGray">
-\begin{equation}
+$$
 {E}_t: Bob's\;mood\;at\;time\;t\;(Observation) \in \{happy, grumpy\}\\
 {X}_t: Weather's\;condition\;at\;time\;t\;(State) \in \{sunny, rainy\}
-\end{equation} </span>
+$$ </span>
 So, the question is, how can Alice infer the weather’s condition (state) regarding Bob’s mood (observation)?
 
 The problem discussed above is an example of the Hidden Markov Model (HMM). It is not possible to model the problem as a Markov Chain in many problems. So, how can we model these problems?
@@ -289,7 +298,7 @@ Let’s get into HMM’s structure. We start with a simple Markov chain. At each
 
 Take a closer look at the figure below to find out HMM's structure:
 <center>
-<img src="resources/9tlhpJ9.png" alt="Bayes Net of Markov Model" width=400/>
+<img src="resources/hmm_structure.png" alt="HMM Structure" width=400/>
 </center> 
 </br>
 
@@ -307,20 +316,20 @@ We are going to calculate joint distribution of HMM.
 
 From the Chain Rule, every joint distribution over $X_{t:1}, E_{t:1}$ can be written as:
 <span style="color:DarkSlateGray">
-\begin{equation}
+$$
 P(X_{t:1}, E_{t:1})=P(X_1)P(E_1 \mid X_1)P(X_2\mid X_1,E_1)P(E_2\mid X_{2:1},E_1)\cdots P(X_t\mid X_{t-1:1},E_{t-1:1})P(E_t\mid X_{t:1},E_{t-1:1})
-\end{equation} </span> 
+$$ </span> 
 Regarding the HMM's structure, we can assume that:
 <span style="color:DarkSlateGray">
-\begin{equation}
+$$
 \forall t>1:\;\;\;X_t \perp \!\!\! \perp X_{t-2:1},E_{t-1:1} \mid X_{t-1}\;\;\;and\;\;\;E_t \perp \!\!\! \perp X_{t-1:1},E_{t-1:1} \mid X_{t}
-\end{equation} </span> 
+$$ </span> 
 Recall that every node given its parents is independent of its non-descendants.
 
 Using the properties above, we get: <span style="color:DarkSlateGray">
-\begin{equation}
+$$
 P(X_{t:1}, E_{t:1})=P(X_1)P(E_1 \mid X_1)\prod_{i = 2}^{t} P(X_i \mid X_{i-1})P(E_i \mid X_i)
-\end{equation} </span> 
+$$ </span> 
 
 ### Hidden Markov Model Applications
 Hidden Markov models are known for their applications in various fields, such as:
@@ -344,7 +353,7 @@ The main core of HMM-based speech recognition systems is the Viterbi algorithm w
 In speech recognition HMMs, the continuous-valued acoustic signals are our observations. States are particular positions in specific words.
 
 <center>
-<img src="https://developer-blogs.nvidia.com/wp-content/uploads/2019/12/automatic-speech-recognition_updated.png" alt="speech recognition" width=400/>
+<img src="resources/automatic-speech-recognition_updated.png" alt="speech recognition" width=400/>
 </center> 
 
 
@@ -357,7 +366,7 @@ Better results can be achieved using attention-based neural machine translation 
 In machine translation HMMs, observations are millions of words and corresponding states are translation options.
 
 <center>
-<img src="https://memoq-com.azureedge.net/wp-content/uploads/2019/07/textra.png" alt="machine translation" width=400/>
+<img src="resources/textra.png" alt="machine translation" width=400/>
 </center> 
 
 #### Robot tracking HMMs
@@ -366,7 +375,19 @@ Hidden Markov Models (HMM) are applied to interoceptive data acquired by a movin
 In Robot tracking HMMs, observations are sensors' continuous perceptions and corresponding states are positions in the map.
 
 <center>
-<img src="https://kapernikov.com/wp-content/uploads/2019/09/kapernikov_robot_localization_tutorial_illustration_v3-02-3000x1351.jpg" alt="machine translation" width=400/>
+<img src="resources/localization.jpeg" alt="robot localization" width=400/>
+</center> 
+
+
+#### Characterizing facial expressions
+Facial Action Coding Systems (FACS) prescribes one of the most comprehensive means to characterize facial expressions.
+
+Now, you may wonder what is the role of HMM in these systems?
+
+We model this problem as an HMM where observations are the feature vectors extracted from face videos, and corresponding states are the hidden emotional state of the individual.
+
+<center>
+<img src="resources/facial_expressions.jpg" alt="Facial Expressions" width=400/>
 </center> 
 
 ## Conclusion
@@ -379,11 +400,11 @@ of observations. Finally, we introduced some of the HMM's well-known application
 
 ## References
 * [Artificial Intelligence: A Modern Approach, 4th Edition](http://aima.cs.berkeley.edu/)
-* [CE417 Lecture Slides, Prof. Rohabn, Sharif University of Technology](http://ce.sharif.edu/courses/00-01/1/ce417-1/resources/root/Slides/PDF/Session%2015_16.pdf)
-* [CSC545 Lecture Slides, University of Miami](https://www.cs.miami.edu/home/visser/csc545-files/ProbabilisticReasoningOverTime.pdf)
+* [CE-417 Lecture Slides, Prof. Rohabn, Sharif University of Technology](http://ce.sharif.edu/courses/00-01/1/ce417-1/resources/root/Slides/PDF/Session%2015_16.pdf)
+* [CSC-545 Lecture Slides, University of Miami](https://www.cs.miami.edu/home/visser/csc545-files/ProbabilisticReasoningOverTime.pdf)
 * [Speech and Language Processing. Daniel Jurafsky & James H. Martin, Stanford University](https://web.stanford.edu/~jurafsky/slp3/A.pdf)
 * [University of Tennesee Lecture Slides](https://nanopdf.com/download/chapter-15-probabilistic-reasoning-over-time_pdf)
 * [Paulo E. Santos (FEI - Sao Paulo) Slides](https://fei.edu.br/~psantos/slidesIA/CAP15-DBN.pdf)
-* [CS 188: Artificial Intelligence Lecture Slides, Dan Klein, Spring 2006](https://inst.eecs.berkeley.edu/~cs188/sp06/slides/cs188%20lecture%2018%20--%20HMMs%20(2pp).pdf)
+* [CS-188: Artificial Intelligence Lecture Slides, Dan Klein, UC Berkeley, Spring 2006](https://inst.eecs.berkeley.edu/~cs188/sp06/slides/cs188%20lecture%2018%20--%20HMMs%20(2pp).pdf)
 
 _\*Some conceptual pictures used in this note are under courtesy of [VectorStock Media](https://vectorstock.com)_
