@@ -47,7 +47,7 @@ Retake variables of the diabetes example. We know that these variables can chang
 In a nutshell, we have:
 <span style="color:DarkSlateGray">
 $$
-{E}_t = Observable\;Variable\;at\;time\;t\
+{E}_t = Observable\;Variable\;at\;time\;t$$$$
 {X}_t = NonObservable\;Variable\;at\;time\;t
 $$
 </span></p>
@@ -101,7 +101,7 @@ We define two parameters here:
 <p>We can find the joint distribution of X regarding the Bayesian network and the parameters we defined. If we consider $X_1$ to $X_n$, then we have:
     <span style="color:DarkSlateGray">
     $$
-    P(X_1, X_2, \cdots, X_{n-1}, X_n) = P(X_1)P(X_2\vert X_1)P(X_3\vert X_2)\cdots P(X_{n-1}\vert X_{n-2})P(X_{n}\vert X_{n-1})\ \Rightarrow P(X_1, X_2, \cdots, X_{n-1}, X_n) =P(X_1)\prod_{t=2}^{n}P(X_t \vert X_{t-1})
+    P(X_1, X_2, \cdots, X_{n-1}, X_n) = P(X_1)P(X_2\vert X_1)P(X_3\vert X_2)\cdots P(X_{n-1}\vert X_{n-2})P(X_{n}\vert X_{n-1}$$$$ \Rightarrow P(X_1, X_2, \cdots, X_{n-1}, X_n) =P(X_1)\prod_{t=2}^{n}P(X_t \vert X_{t-1})
     $$
     </span></p>
 <p>In the next section, we will prove this joint distribution using Chain Rule and independence.</p>
@@ -125,7 +125,7 @@ $$
 So, after applying independence to Chain Rule, we have:
 <span style="color:DarkSlateGray">
     $$
-    P(X_1, X_2, \cdots, X_{n-1}, X_n)= P(X_1)P(X_2\vert X_1)P(X_3\vert X_1, X_2)\cdots P(X_{n}\vert X_1,X_2,\cdots X_{n-1})\=P(X_1)P(X_2\vert X_1)P(X_3\vert X_2)\cdots P(X_{n}\vert X_{n-1})\=P(X_1)\prod_{t=2}^{n}P(X_t \vert X_{t-1})
+    P(X_1, X_2, \cdots, X_{n-1}, X_n)= P(X_1)P(X_2\vert X_1)P(X_3\vert X_1, X_2)\cdots P(X_{n}\vert X_1,X_2,\cdots X_{n-1})$$$$=P(X_1)P(X_2\vert X_1)P(X_3\vert X_2)\cdots P(X_{n}\vert X_{n-1})$$$$=P(X_1)\prod_{t=2}^{n}P(X_t \vert X_{t-1})
     $$
     </span>
 which is the same result we get from the previous section.</p>
@@ -203,7 +203,7 @@ $$</p>
 <p>Now, we formulate the problem formally:
 <span style="color:DarkSlateGray">
 $$
-{E}_t: Bob's\;mood\;at\;time\;t\;(Observation) \in {happy, grumpy}\
+{E}_t: Bob's\;mood\;at\;time\;t\;(Observation) \in {happy, grumpy}$$$$
 {X}_t: Weather's\;condition\;at\;time\;t\;(State) \in {sunny, rainy}
 $$ </span>
 So, the question is, how can Alice infer the weather’s condition (state) regarding Bob’s mood (observation)?</p>
